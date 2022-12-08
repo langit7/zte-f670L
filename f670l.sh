@@ -6,8 +6,8 @@
 
 
 login=admin
-password=Ind1Rum4h4n
-ipont=http://192.168.11.1
+password=Telkomdso123
+ipont=http://192.168.1.1
 
 ##Simpan Cookie
 cookie=$(

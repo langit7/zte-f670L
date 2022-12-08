@@ -15,9 +15,9 @@ from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.common.desired_capabilities import DesiredCapabilities
 from selenium.webdriver.chrome.options import Options
 
-ipont = "http://192.168.11.1/"
+ipont = "http://192.168.1.1/"
 user = "admin"
-passwd = "Ind1Rum4h4n"
+passwd = "Telkomdso123"
 
 options = Options()
 driver = webdriver.Chrome(options=options)
