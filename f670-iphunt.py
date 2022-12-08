@@ -1,5 +1,5 @@
 #Script Cari Ip Public di ONT ZTE F670L (V9.0.11P1N13)
-#Selinum IDE Google Tesseract
+#Selinum IDE 
 #Tested pada Chrome windows versi 108
 #Arif W.A @ 07 December 2022
 #PPPOE setting set IP version ipv4/v6
