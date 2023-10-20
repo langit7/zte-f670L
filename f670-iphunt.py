@@ -23,7 +23,7 @@ options = Options()
 driver = webdriver.Chrome(options=options)
 #options.add_experimental_option("detach", True)
 
-#driver.implicitly_wait(20)  # gives an implicit wait for 20 seconds
+driver.implicitly_wait(20)  # gives an implicit wait for 20 seconds
 driver.get(ipont)
 driver.set_window_size(968, 992)
 #Bukan Page Login
@@ -31,11 +31,12 @@ driver.find_element(By.ID, "Frm_Username").click()
 driver.find_element(By.ID, "Frm_Username").send_keys(user)
 driver.find_element(By.ID, "Frm_Password").send_keys(passwd)
 driver.find_element(By.ID, "LoginId").click()
-time.sleep(3)
+#time.sleep(3)
 #Buka Page WAN Status untuk melihat IP 
 driver.find_element(By.ID, "internet").click()
+#time.sleep(3)
 driver.find_element(By.ID, "internetStatus").click()
-time.sleep(3)
+#time.sleep(3)
 driver.find_element(By.ID, "ethWanStatus").click()
 driver.find_element(By.ID, "cIPAddress:1").click()
 #Asumsi ada 2 profile koneksi WAN : TR069 dan omci_ipv4_pppoe_1 
