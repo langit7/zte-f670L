@@ -3,7 +3,8 @@ Tested hanya versi firmware  ZTE F670L V9.0.11P1N40
 Hanya untuk file  yang ada di folder /userconfig/cfg/*.xml 
 Untuk file backup dari web remove 145 bytes header sampai String F670L
 python decodef670l.py   db_user_cfg.xml  --mac aa::bb:cc:dd:ff --serial ZTEGD0123456  outfile.xml
-#ArifW @Oct10 2023 
+ArifW @Oct10 2023 
+Original repository https://github.com/mkst/zte-config-utility
 """
 import os
 import sys
