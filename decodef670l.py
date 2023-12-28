@@ -14,14 +14,6 @@ import linecache
 from zcu.xcryptors import Xcryptor, CBCXcryptor
 from zcu.known_keys import serial_keygen, signature_keygen
 
-def strip_header(input_file, output_file):
-    with open(input_file, 'rb') as file:
-        file.seek(145)  # Move the file cursor to the 21st byte
-        remaining_data = file.read()  # Read the remaining content
-
-    with open(output_file, 'wb') as new_file:
-        new_file.write(remaining_data)  # Write the remaining content to a new file)
-
 def main():
     """the main function"""
     parser = argparse.ArgumentParser(description="Decode config.bin from ZTE Routers",
