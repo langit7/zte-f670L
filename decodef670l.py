@@ -1,10 +1,7 @@
 """Decode ZTE F670L backup config
-Tested hanya versi firmware  ZTE F670L V9.0.11P1N40
-Hanya untuk file  yang ada di folder /userconfig/cfg/*.xml 
-Untuk file backup dari web remove 145 bytes header sampai String F670L
-python decodef670l.py   db_user_cfg.xml  --mac aa::bb:cc:dd:ff --serial ZTEGD0123456  outfile.xml
-ArifW @Oct10 2023 
-Original repository https://github.com/mkst/zte-config-utility
+Tested hanya versi firmware  ZTE F670L V9.0.11P1N40  / V9.0.11P1N15
+python decodef670l.py config.bin --mac aa::bb:cc:dd:ff --serial ZTEGD0123456  config.xml
+#Syair @Dec29 2023 
 """
 import os
 import sys
@@ -17,12 +14,19 @@ import linecache
 from zcu.xcryptors import Xcryptor, CBCXcryptor
 from zcu.known_keys import serial_keygen, signature_keygen
 
+def strip_header(input_file, output_file):
+    with open(input_file, 'rb') as file:
+        file.seek(145)  # Move the file cursor to the 21st byte
+        remaining_data = file.read()  # Read the remaining content
+
+    with open(output_file, 'wb') as new_file:
+        new_file.write(remaining_data)  # Write the remaining content to a new file)
 
 def main():
     """the main function"""
     parser = argparse.ArgumentParser(description="Decode config.bin from ZTE Routers",
                                      formatter_class=argparse.RawDescriptionHelpFormatter)
-    parser.add_argument("infile", type=argparse.FileType("rb"),
+    parser.add_argument("infile1", type=argparse.FileType("rb"),
                         help="Encoded configuration file e.g. config.bin")
     parser.add_argument("outfile", type=argparse.FileType("wb"),
                         help="Output file e.g. config.xml")
@@ -51,12 +55,16 @@ def main():
     parser.add_argument("--iv-suffix", type=str, default='',
                         help="Override IV suffix for Signature based key generation")
     args = parser.parse_args()
-
-    infile = args.infile
+    var = b"F670L"
+    if isinstance(var, bytes):
+    # do something with binary string
+        infile1 = args.infile1
+        infile1.seek(145)  # Move the file cursor to the 21st byte
+        remaining_data = infile1.read()  # Read the remaining content
+        infile = io.BytesIO(remaining_data)
+    elif isinstance(var, str):
+        infile = arg.infile1
     outfile = args.outfile
-    #infile = open(args.file, 'rb')
-    #start = infile.seek(145)
-    # infile.seek(start)
 
     zcu.zte.read_header(infile)
     signature = zcu.zte.read_signature(infile).decode()
@@ -229,7 +237,7 @@ def main():
         mac = "%02x%02x%02x%02x%02x%02x" % (
             mac[5], mac[4], mac[3], mac[2], mac[1], mac[0])
 
-        print(len(args.serial))
+        print("panjang serial %s" % len(args.serial))
         if len(args.serial) == 12:
             kp1 = args.serial[4:]
         elif len(args.serial) == 19:
