@@ -48,15 +48,11 @@ def main():
                         help="Override IV suffix for Signature based key generation")
     args = parser.parse_args()
 
-    var = b"F670L"
-    if isinstance(var, bytes):
-        infile1 = args.infile1
-        infile1.seek(145)  # Move the file cursor to the 145st bytes
-        remaining_data = infile1.read()  # Read the remaining content
-        infile = io.BytesIO(remaining_data)
-    elif isinstance(var, str):
-        infile = arg.infile1
-
+    infile1 = args.infile1
+    infile1.seek(145)  # Move the file cursor to the 145st bytes
+    remaining_data = infile1.read()  # Read the remaining content
+    
+    infile = io.BytesIO(remaining_data)
     outfile = args.outfile
 
     zcu.zte.read_header(infile)
