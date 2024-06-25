@@ -12,4 +12,5 @@ Versi python
 
 # decodef670l.py decode backup config 
 Tested hanya versi firmware  ZTE F670L V9.0.11P1N40  / V9.0.11P1N15
+
 python decodef670l.py config.bin --mac aa::bb:cc:dd:ff --serial ZTEGD0123456  config.xml
